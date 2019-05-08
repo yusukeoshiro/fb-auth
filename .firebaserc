@@ -1,0 +1,5 @@
+{
+  "projects": {
+    "default": "gke-demo-oshiro-app"
+  }
+}

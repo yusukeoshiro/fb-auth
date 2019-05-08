@@ -8,7 +8,7 @@ declare var firebase: any;
 })
 export class AppComponent implements OnInit {
   title = 'cip-client';
-  public myCred = {};
+  public myCred: any = {};
 
   private authProviderMap = {
     'yahoo' : 'oidc.yahoo!-japan',
@@ -40,10 +40,19 @@ export class AppComponent implements OnInit {
 
     auth.signInWithPopup(provider).then(
       (result) => {
-        console.log(result);
+        // console.log(result);
+        console.log('----');
         console.log(result.credential);
-        console.log(result.credential.idToken);
+        // console.log(result.credential.idToken);
         this.myCred = result.credential;
+
+        firebase.auth().currentUser.getIdToken(true).then(
+          (idToken) => {
+            this.myCred.fbIdToken = idToken;
+          }
+        )
+
+
       }
     )
   }

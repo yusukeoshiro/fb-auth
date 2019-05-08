@@ -8,16 +8,30 @@
   <button class="btn btn-primary" type="button" (click)="onAuthLogin('google')">
     login with Google
   </button>
+
 </div>
 
 <div class="container">
-  <h5>ID Token</h5>
+  <hr>
+</div>
+
+<div class="container">
+  <h5>ID Token from ID Provider</h5>
   <p class="wordwrap">
     {{myCred.idToken}}
   </p>
+</div>
 
-  <a href="https://jwt.io/">jwt.io</a> <br>
 
+<div class="container">
+  <h5>ID Token Signed by Platform</h5>
+  <p class="wordwrap">
+    {{myCred.fbIdToken}}
+  </p>
+</div>
+
+<div class="container">
+  <a href="https://jwt.io/" target="_blank">jwt.io</a> <br>
 </div>
 
 
