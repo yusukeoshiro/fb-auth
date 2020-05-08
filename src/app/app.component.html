@@ -16,21 +16,25 @@
 </div>
 
 <div class="container">
+  <h5>ID Token Signed by Firebase</h5>
+  <p class="wordwrap">
+    {{idTokenFirebase}}
+  </p>
+</div>
+
+<div class="container">
   <h5>ID Token from ID Provider</h5>
   <p class="wordwrap">
-    {{myCred.idToken}}
-  </p>
-</div>
-
-
-<div class="container">
-  <h5>ID Token Signed by Platform</h5>
-  <p class="wordwrap">
-    {{myCred.fbIdToken}}
+    {{idTokenIdProvider}}
   </p>
 </div>
 
 <div class="container">
+  <hr>
+</div>
+
+<div class="container">
+  <h5>References</h5>
   <a href="https://jwt.io/" target="_blank">jwt.io</a> <br>
   <a href="https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com" target="_blank">Firebase Auth Public Keys</a> <br/>
   <a href="https://auth.login.yahoo.co.jp/yconnect/v2/public-keys" target="_blank">Yahoo! Japan Public Keys</a> <br/>

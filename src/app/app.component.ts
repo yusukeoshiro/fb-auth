@@ -8,7 +8,8 @@ declare var firebase: any;
 })
 export class AppComponent implements OnInit {
   title = 'cip-client';
-  public myCred: any = {};
+  public idTokenIdProvider: string;
+  public idTokenFirebase: string;
 
   private authProviderMap = {
     'yahoo' : 'oidc.yahoo!-japan',
@@ -25,35 +26,16 @@ export class AppComponent implements OnInit {
     firebase.initializeApp(config);
   }
 
-  public onAuthLogin(authName) {
-
-    let provider;
-
-    if (authName == 'google') {
-      provider = new firebase.auth.GoogleAuthProvider();
-    } else {
-      const oAuthProvider = this.authProviderMap[authName];
-      provider = new firebase.auth.OAuthProvider(oAuthProvider);
-    }
-
+  public async onAuthLogin(authName) {
     const auth = firebase.auth();
+    const oAuthProvider = this.authProviderMap[authName];
+    const provider = (authName == 'google')
+      ? new firebase.auth.GoogleAuthProvider()
+      : new firebase.auth.OAuthProvider(oAuthProvider);
 
-    auth.signInWithPopup(provider).then(
-      (result) => {
-        // console.log(result);
-        console.log('----');
-        console.log(result.credential);
-        // console.log(result.credential.idToken);
-        this.myCred = result.credential;
+    const result = await auth.signInWithPopup(provider);
+    this.idTokenIdProvider = result.credential.idToken;
+    this.idTokenFirebase   = await firebase.auth().currentUser.getIdToken(true);
 
-        firebase.auth().currentUser.getIdToken(true).then(
-          (idToken) => {
-            this.myCred.fbIdToken = idToken;
-          }
-        )
-
-
-      }
-    )
   }
 }
